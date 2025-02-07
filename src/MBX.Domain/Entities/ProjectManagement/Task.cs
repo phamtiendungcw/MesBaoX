@@ -1,4 +1,5 @@
 ﻿using MBX.Domain.Common;
+using MBX.Domain.Entities.Core;
 
 namespace MBX.Domain.Entities.ProjectManagement;
 
@@ -17,7 +18,7 @@ public class Task : BaseEntity
     public decimal? ActualHours { get; set; } // Giờ thực tế (tùy chọn) - Nullable
     public decimal? PercentComplete { get; set; } // Phần trăm hoàn thành (tùy chọn) - Nullable
     public Guid? AssignedToUserId { get; set; } // ID người được giao việc (tùy chọn)
-    public Core.User? AssignedToUser { get; set; } // Người được giao việc (Navigation)
+    public User? AssignedToUser { get; set; } // Người được giao việc (Navigation)
     public Guid? ParentTaskId { get; set; } // ID công việc cha (tùy chọn)
     public Task? ParentTask { get; set; } // Công việc cha (Navigation)
     public string? Notes { get; set; } // Ghi chú công việc (tùy chọn) - Nullable

@@ -1,11 +1,12 @@
 ﻿using MBX.Domain.Common;
+using MBX.Domain.Entities.Core;
 
 namespace MBX.Domain.Entities.Sales;
 
 public class SalesOpportunity : BaseEntity
 {
     public Guid CompanyId { get; set; } // ID công ty
-    public Core.Company Company { get; set; } = null!; // Công ty mà cơ hội bán hàng thuộc về (Navigation)
+    public Company Company { get; set; } = null!; // Công ty mà cơ hội bán hàng thuộc về (Navigation)
     public string OpportunityName { get; set; } = string.Empty; // Tên cơ hội bán hàng
     public Guid CustomerId { get; set; } // ID khách hàng
     public Customer Customer { get; set; } = null!; // Khách hàng liên quan đến cơ hội (Navigation)
@@ -14,7 +15,7 @@ public class SalesOpportunity : BaseEntity
     public decimal? Probability { get; set; } // Xác suất thành công (tùy chọn)
     public decimal? EstimatedValue { get; set; } // Giá trị ước tính cơ hội (tùy chọn)
     public Guid SalespersonId { get; set; } // ID nhân viên bán hàng
-    public Core.User Salesperson { get; set; } = null!; // Nhân viên bán hàng phụ trách (Navigation)
+    public User Salesperson { get; set; } = null!; // Nhân viên bán hàng phụ trách (Navigation)
     public string? Notes { get; set; } // Ghi chú cơ hội (tùy chọn)
     public string? OpportunityCode { get; set; } // Mã cơ hội (tùy chọn)
     public string? OpportunityType { get; set; } // Loại cơ hội (tùy chọn)
