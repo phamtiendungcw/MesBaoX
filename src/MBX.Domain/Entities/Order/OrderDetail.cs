@@ -13,5 +13,4 @@ public class OrderDetail : BaseEntity
     public Order Order { get; set; } = null!; // Đơn hàng mà OrderDetail thuộc về (Navigation)
     public Guid ProductId { get; set; } // ID sản phẩm
     public Product.Product Product { get; set; } = null!; // Sản phẩm (Navigation)
-
 }

@@ -1,4 +1,5 @@
 ﻿using MBX.Domain.Common;
+using MBX.Domain.Entities.Product;
 
 namespace MBX.Domain.Entities.Support;
 
@@ -20,5 +21,5 @@ public class Promotion : BaseEntity
     public Guid? ProductId { get; set; } // ID sản phẩm (tùy chọn)
     public Product.Product? Product { get; set; } // Sản phẩm (Navigation)
     public Guid? CategoryId { get; set; } // ID danh mục (tùy chọn)
-    public Product.Category? Category { get; set; } // Danh mục (Navigation)
+    public Category? Category { get; set; } // Danh mục (Navigation)
 }
