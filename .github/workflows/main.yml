@@ -1,0 +1,154 @@
+﻿name: Full Solution CI with SonarQube
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-backend:
+    name: Build Backend (.NET)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Cache .NET dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build Backend
+        run: dotnet build --no-restore
+
+      - name: Test Backend
+        run: dotnet test --no-build --verbosity normal
+
+  build-frontend:
+    name: Build Frontend (Angular)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Cache npm modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./src/MBX.UI/node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('./src/MBX.UI/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+
+      - name: Install dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: npm install
+        working-directory: ./src/MBX.UI
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli@16.2.16
+        working-directory: ./src/MBX.UI
+
+      - name: Install Husky
+        run: npm install husky --save-dev
+        working-directory: ./src/MBX.UI
+
+      - name: Test Angular application
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
+        working-directory: ./src/MBX.UI
+
+      - name: Build Angular application
+        run: ng build --configuration production --output-path docs --base-href /mesbaox-ui/
+        working-directory: ./src/MBX.UI
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-artifact@v4
+        with:
+          path: ./src/MBX.UI/docs
+
+  sonar-analysis:
+    name: SonarQube Analysis
+    runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Cache SonarQube Cloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache SonarQube Cloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v4
+        with:
+          path: ./.sonar/scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+
+      - name: Install SonarQube Cloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ./.sonar/scanner
+          dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
+
+      - name: Run SonarQube analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          ./.sonar/scanner/dotnet-sonarscanner begin /k:"phamtiendungcw_MesBaoX" /o:"phamtiendungcw" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: [build-frontend, sonar-analysis]
+    if: github.ref == 'refs/heads/master'
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
