@@ -1,5 +1,3 @@
-﻿﻿# Contributing to MesBaoX
-
 We appreciate your interest in contributing to **MesBaoX**! Whether it's fixing bugs, adding new features, improving documentation, or providing suggestions, your help is valuable.
 
 ---
