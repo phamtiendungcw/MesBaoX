@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2C7D4972-BC69-4DE3-9797-BE96313124B2}"
+	ProjectSection(SolutionItems) = preProject
+		docs\MesBaoX - Phân tích và thiết kế hệ thống.docx = docs\MesBaoX - Phân tích và thiết kế hệ thống.docx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B4862E43-874A-4704-BC72-30120A989026}"
 EndProject
