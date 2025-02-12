@@ -8,25 +8,40 @@ namespace MBX.Domain.Entities.Products;
 
 public class Product : BaseEntity
 {
-    [Required][MaxLength(255)] public string ProductName { get; set; } = string.Empty; // Tên sản phẩm (bắt buộc, độ dài tối đa 255 ký tự)
-    [MaxLength(4000)] public string? Description { get; set; } // Mô tả sản phẩm (không bắt buộc, độ dài tối đa 4000 ký tự)
-    [Required][MaxLength(50)] public string SKU { get; set; } = string.Empty; // Mã SKU sản phẩm (bắt buộc, độ dài tối đa 50 ký tự, thường dùng để quản lý kho)
+    [Required]
+    [MaxLength(255)]
+    public string ProductName { get; set; } = string.Empty; // Tên sản phẩm (bắt buộc, độ dài tối đa 255 ký tự)
+
+    [MaxLength(4000)]
+    public string? Description { get; set; } // Mô tả sản phẩm (không bắt buộc, độ dài tối đa 4000 ký tự)
+
+    [Required]
+    [MaxLength(50)]
+    public string SKU { get; set; } = string.Empty; // Mã SKU sản phẩm (bắt buộc, độ dài tối đa 50 ký tự, thường dùng để quản lý kho)
 
     [Column(TypeName = "decimal(18, 2)")] // Định nghĩa kiểu dữ liệu decimal cho giá tiền (18 chữ số, 2 số thập phân)
     public decimal Price { get; set; } // Giá sản phẩm (bắt buộc)
 
-    [Column(TypeName = "decimal(18, 2)")] public decimal? SalePrice { get; set; } // Giá khuyến mãi (không bắt buộc)
+    [Column(TypeName = "decimal(18, 2)")]
+    public decimal? SalePrice { get; set; } // Giá khuyến mãi (không bắt buộc)
+
     public int QuantityInStock { get; set; } // Số lượng tồn kho (bắt buộc)
-    [Required][MaxLength(255)] public string Slug { get; set; } = string.Empty; // Slug URL thân thiện (bắt buộc, độ dài tối đa 255 ký tự, thường dùng cho URL)
+
+    [Required]
+    [MaxLength(255)]
+    public string Slug { get; set; } = string.Empty; // Slug URL thân thiện (bắt buộc, độ dài tối đa 255 ký tự, thường dùng cho URL)
 
     [Column(TypeName = "decimal(18, 3)")] // Ví dụ: trọng lượng có thể có 3 chữ số thập phân
     public decimal? Weight { get; set; } // Trọng lượng sản phẩm (không bắt buộc, kiểu decimal với 3 số thập phân)
 
-    [MaxLength(255)] public string? Dimensions { get; set; } // Kích thước sản phẩm (không bắt buộc, độ dài tối đa 255 ký tự)
+    [MaxLength(255)]
+    public string? Dimensions { get; set; } // Kích thước sản phẩm (không bắt buộc, độ dài tối đa 255 ký tự)
 
     #region Navigation properties
 
-    [Required] public Guid CategoryId { get; set; } // ID danh mục (khóa ngoại đến bảng Category, bắt buộc)
+    [Required]
+    public Guid CategoryId { get; set; } // ID danh mục (khóa ngoại đến bảng Category, bắt buộc)
+
     public virtual Category Category { get; set; } = null!; // Navigation property cho danh mục (bắt buộc)
     public Guid? BrandId { get; set; } // ID thương hiệu (khóa ngoại đến bảng Brand, có thể null nếu không có thương hiệu)
     public virtual Brand? Brand { get; set; } // Navigation property cho thương hiệu (có thể null)
@@ -43,5 +58,5 @@ public class Product : BaseEntity
     public virtual ICollection<OrderItemReturn> OrderItemReturns { get; set; } = new List<OrderItemReturn>(); // Navigation property cho chi tiết trả hàng (danh sách chi tiết trả hàng liên quan đến sản phẩm)
     public virtual ICollection<OrderItemShipment> OrderItemShipments { get; set; } = new List<OrderItemShipment>(); // Navigation property cho chi tiết lô hàng (danh sách chi tiết lô hàng liên quan đến sản phẩm)
 
-    #endregion
+    #endregion Navigation properties
 }
