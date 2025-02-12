@@ -4,10 +4,17 @@ namespace MBX.Domain.Entities.Content;
 
 public class MenuItem : BaseEntity
 {
-    [Required] public Guid MenuId { get; set; } // ID menu cha (khóa ngoại đến bảng Menu, bắt buộc)
+    [Required]
+    public Guid MenuId { get; set; } // ID menu cha (khóa ngoại đến bảng Menu, bắt buộc)
+
     public virtual Menu Menu { get; set; } = null!; // Navigation property cho menu cha (bắt buộc)
-    [Required][MaxLength(255)] public string MenuItemName { get; set; } = string.Empty; // Tên mục menu (bắt buộc, độ dài tối đa 255 ký tự)
-    [MaxLength(255)] public string? Url { get; set; } // URL liên kết (không bắt buộc, độ dài tối đa 255 ký tự, có thể là URL bên ngoài hoặc URL nội bộ)
+
+    [Required]
+    [MaxLength(255)]
+    public string MenuItemName { get; set; } = string.Empty; // Tên mục menu (bắt buộc, độ dài tối đa 255 ký tự)
+
+    [MaxLength(255)]
+    public string? Url { get; set; } // URL liên kết (không bắt buộc, độ dài tối đa 255 ký tự, có thể là URL bên ngoài hoặc URL nội bộ)
 
     #region Navigation properties
 
@@ -18,5 +25,5 @@ public class MenuItem : BaseEntity
     public virtual MenuItem? ParentMenuItem { get; set; } // Navigation property cho mục menu cha (có thể null, hỗ trợ menu đa cấp)
     public virtual ICollection<MenuItem> ChildMenuItems { get; set; } = new List<MenuItem>(); // Navigation property cho mục menu con (danh sách các mục menu con thuộc mục menu này, hỗ trợ menu đa cấp)
 
-    #endregion
+    #endregion Navigation properties
 }
