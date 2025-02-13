@@ -37,8 +37,6 @@ public class Product : BaseEntity
     [MaxLength(255)]
     public string? Dimensions { get; set; } // Kích thước sản phẩm (không bắt buộc, độ dài tối đa 255 ký tự)
 
-    #region Navigation properties
-
     [Required]
     public Guid CategoryId { get; set; } // ID danh mục (khóa ngoại đến bảng Category, bắt buộc)
 
@@ -57,6 +55,4 @@ public class Product : BaseEntity
     public virtual ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>(); // Navigation property cho lịch sử nhập/xuất kho (danh sách lịch sử nhập/xuất kho của sản phẩm)
     public virtual ICollection<OrderItemReturn> OrderItemReturns { get; set; } = new List<OrderItemReturn>(); // Navigation property cho chi tiết trả hàng (danh sách chi tiết trả hàng liên quan đến sản phẩm)
     public virtual ICollection<OrderItemShipment> OrderItemShipments { get; set; } = new List<OrderItemShipment>(); // Navigation property cho chi tiết lô hàng (danh sách chi tiết lô hàng liên quan đến sản phẩm)
-
-    #endregion Navigation properties
 }

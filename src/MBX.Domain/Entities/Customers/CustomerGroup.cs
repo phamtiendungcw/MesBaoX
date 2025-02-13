@@ -15,9 +15,5 @@ public class CustomerGroup : BaseEntity
     [Column(TypeName = "decimal(5, 2)")] // Ví dụ: Giảm giá phần trăm (tối đa 99.99%)
     public decimal? DiscountPercentage { get; set; } // Phần trăm giảm giá mặc định cho nhóm (không bắt buộc, kiểu decimal với 2 số thập phân)
 
-    #region Navigation properties
-
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>(); // Navigation property cho khách hàng (quan hệ Many-to-Many, danh sách các khách hàng thuộc nhóm này)
-
-    #endregion Navigation properties
 }

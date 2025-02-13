@@ -46,13 +46,9 @@ public class Order : BaseEntity
     [Column(TypeName = "decimal(18, 2)")]
     public decimal? DiscountAmount { get; set; } // Tiền giảm giá (không bắt buộc, kiểu decimal với 2 số thập phân, từ mã giảm giá hoặc khuyến mãi)
 
-    #region Navigation properties
-
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>(); // Navigation property cho chi tiết đơn hàng (danh sách các chi tiết đơn hàng của đơn hàng này)
     public virtual ICollection<PaymentTransaction> PaymentTransactions { get; set; } = new List<PaymentTransaction>(); // Navigation property cho giao dịch thanh toán (danh sách các giao dịch thanh toán của đơn hàng này)
     public virtual ICollection<OrderCoupon> OrderCoupons { get; set; } = new List<OrderCoupon>(); // Navigation property cho mã giảm giá sử dụng (quan hệ Many-to-Many, danh sách các mã giảm giá được sử dụng trong đơn hàng)
     public virtual ICollection<OrderReturn> OrderReturns { get; set; } = new List<OrderReturn>(); // Navigation property cho trả hàng (danh sách các yêu cầu trả hàng liên quan đến đơn hàng này)
     public virtual ICollection<Shipment> Shipments { get; set; } = new List<Shipment>(); // Navigation property cho lô hàng (danh sách các lô hàng của đơn hàng này)
-
-    #endregion Navigation properties
 }

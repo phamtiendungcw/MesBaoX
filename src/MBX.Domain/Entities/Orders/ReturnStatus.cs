@@ -11,9 +11,5 @@ public class ReturnStatus : BaseEntity
     [MaxLength(1000)]
     public string? Description { get; set; } // Mô tả trạng thái trả hàng (không bắt buộc, độ dài tối đa 1000 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<OrderReturn> OrderReturns { get; set; } = new List<OrderReturn>(); // Navigation property cho trả hàng (danh sách các yêu cầu trả hàng có trạng thái này)
-
-    #endregion Navigation properties
 }

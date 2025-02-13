@@ -36,12 +36,8 @@ public class User : BaseEntity
     [MaxLength(20)]
     public string? PhoneNumber { get; set; } // Số điện thoại người dùng (không bắt buộc, độ dài tối đa 20 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<Role> Roles { get; set; } = new List<Role>(); // Navigation property cho vai trò (quan hệ Many-to-Many, danh sách các vai trò của người dùng)
     public virtual ICollection<CustomerNote> CustomerNotes { get; set; } = new List<CustomerNote>(); // Navigation property cho ghi chú khách hàng (danh sách các ghi chú khách hàng do người dùng này tạo)
     public virtual ICollection<MediaLibrary> MediaLibraries { get; set; } = new List<MediaLibrary>(); // Navigation property cho thư viện media (danh sách các media file do người dùng này tải lên)
     public virtual ICollection<ActivityLog> ActivityLogs { get; set; } = new List<ActivityLog>(); // Navigation property cho nhật ký hoạt động (danh sách các hoạt động do người dùng này thực hiện)
-
-    #endregion Navigation properties
 }

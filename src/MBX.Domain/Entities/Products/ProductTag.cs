@@ -11,9 +11,5 @@ public class ProductTag : BaseEntity
     [MaxLength(1000)]
     public string? Description { get; set; } // Mô tả tag sản phẩm (không bắt buộc, độ dài tối đa 1000 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<Product> Products { get; set; } = new List<Product>(); // Navigation property cho sản phẩm (quan hệ Many-to-Many, danh sách các sản phẩm được gắn tag này)
-
-    #endregion Navigation properties
 }

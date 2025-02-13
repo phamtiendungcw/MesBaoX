@@ -12,12 +12,8 @@ public class ProductSpecification : BaseEntity
     [MaxLength(1000)]
     public string SpecificationValue { get; set; } = string.Empty; // Giá trị thông số kỹ thuật (ví dụ: "Cotton 100%", "6.7 inch") (bắt buộc, độ dài tối đa 1000 ký tự)
 
-    #region Navigation properties
-
     [Required]
     public Guid ProductId { get; set; }
 
     public virtual Product Product { get; set; } = null!;
-
-    #endregion Navigation properties
 }

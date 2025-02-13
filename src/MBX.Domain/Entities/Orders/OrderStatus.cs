@@ -11,9 +11,5 @@ public class OrderStatus : BaseEntity
     [MaxLength(1000)]
     public string? Description { get; set; } // Mô tả trạng thái đơn hàng (không bắt buộc, độ dài tối đa 1000 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>(); // Navigation property cho đơn hàng (danh sách các đơn hàng có trạng thái này)
-
-    #endregion Navigation properties
 }

@@ -18,9 +18,5 @@ public class ShippingMethod : BaseEntity
     [MaxLength(255)]
     public string? EstimatedDeliveryTime { get; set; } // Thời gian giao hàng dự kiến (không bắt buộc, độ dài tối đa 255 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>(); // Navigation property cho đơn hàng (danh sách các đơn hàng sử dụng phương thức vận chuyển này)
-
-    #endregion Navigation properties
 }

@@ -17,10 +17,6 @@ public class Warehouse : BaseEntity
     [MaxLength(20)]
     public string? PhoneNumber { get; set; } // Số điện thoại liên hệ kho (không bắt buộc, độ dài tối đa 20 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<StockLevel> StockLevels { get; set; } = new List<StockLevel>(); // Navigation property cho mức tồn kho (danh sách mức tồn kho tại kho này)
     public virtual ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>(); // Navigation property cho lịch sử nhập/xuất kho (danh sách lịch sử nhập/xuất kho tại kho này)
-
-    #endregion Navigation properties
 }

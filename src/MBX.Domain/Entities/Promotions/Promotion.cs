@@ -28,10 +28,6 @@ public class Promotion : BaseEntity
     [Column(TypeName = "decimal(18, 2)")]
     public decimal? MaximumDiscountAmount { get; set; } // Số tiền giảm giá tối đa (cho khuyến mãi phần trăm) (không bắt buộc, kiểu decimal với 2 số thập phân)
 
-    #region Navigation properties
-
     public virtual ICollection<Coupon> Coupons { get; set; } = new List<Coupon>(); // Navigation property cho mã giảm giá (danh sách các mã giảm giá liên kết với khuyến mãi này)
     public virtual ICollection<PromotionRule> PromotionRules { get; set; } = new List<PromotionRule>(); // Navigation property cho quy tắc khuyến mãi (danh sách các quy tắc áp dụng cho khuyến mãi này)
-
-    #endregion Navigation properties
 }

@@ -22,9 +22,5 @@ public class Shipment : BaseEntity
     [MaxLength(255)]
     public string? ShipmentStatus { get; set; } // Trạng thái lô hàng (ví dụ: "Đang lấy hàng", "Đang vận chuyển", "Đã giao hàng") (không bắt buộc, độ dài tối đa 255 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<OrderItemShipment> OrderItemShipments { get; set; } = new List<OrderItemShipment>(); // Navigation property cho chi tiết lô hàng (danh sách chi tiết lô hàng của lô hàng này)
-
-    #endregion Navigation properties
 }
