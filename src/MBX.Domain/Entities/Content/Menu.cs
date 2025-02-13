@@ -11,9 +11,5 @@ public class Menu : BaseEntity
     [MaxLength(1000)]
     public string? Description { get; set; } // Mô tả menu (không bắt buộc, độ dài tối đa 1000 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>(); // Navigation property cho mục menu (danh sách các mục menu thuộc menu này)
-
-    #endregion Navigation properties
 }

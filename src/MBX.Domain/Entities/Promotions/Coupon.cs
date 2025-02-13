@@ -18,9 +18,5 @@ public class Coupon : BaseEntity
     public int? UsageLimit { get; set; } // Số lần sử dụng tối đa (không bắt buộc, null nghĩa là không giới hạn)
     public DateTime? ExpiryDate { get; set; } // Ngày hết hạn mã giảm giá (không bắt buộc)
 
-    #region Navigation properties
-
     public virtual ICollection<OrderCoupon> OrderCoupons { get; set; } = new List<OrderCoupon>(); // Navigation property cho đơn hàng sử dụng mã giảm giá (quan hệ Many-to-Many, danh sách các đơn hàng đã sử dụng mã giảm giá này)
-
-    #endregion Navigation properties
 }

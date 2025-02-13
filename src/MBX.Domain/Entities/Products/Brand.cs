@@ -14,13 +14,9 @@ public class Brand : BaseEntity
     [MaxLength(255)]
     public string? LogoUrl { get; set; } // URL logo thương hiệu (không bắt buộc, độ dài tối đa 255 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<Product> Products { get; set; } = new List<Product>(); // Navigation property cho sản phẩm (danh sách các sản phẩm thuộc thương hiệu này)
 
     [Required]
     [MaxLength(255)]
     public string Slug { get; set; } = string.Empty; // Slug URL thân thiện (bắt buộc, độ dài tối đa 255 ký tự, thường dùng cho URL)
-
-    #endregion Navigation properties
 }

@@ -36,10 +36,6 @@ public class Address : BaseEntity
     public bool IsDefaultShippingAddress { get; set; } // Xác định địa chỉ là địa chỉ giao hàng mặc định (mặc định false)
     public bool IsDefaultBillingAddress { get; set; } // Xác định địa chỉ là địa chỉ thanh toán mặc định (mặc định false)
 
-    #region Navigation properties
-
     public virtual ICollection<Order> ShippingOrders { get; set; } = new List<Order>(); // Danh sách các đơn hàng sử dụng địa chỉ này làm địa chỉ giao hàng
     public virtual ICollection<Order> BillingOrders { get; set; } = new List<Order>(); // Danh sách các đơn hàng sử dụng địa chỉ này làm địa chỉ thanh toán
-
-    #endregion Navigation properties
 }

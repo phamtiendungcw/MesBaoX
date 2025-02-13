@@ -36,14 +36,10 @@ public class Customer : BaseEntity
     [MaxLength(20)]
     public string? Gender { get; set; } // Giới tính (không bắt buộc, độ dài tối đa 20 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>(); // Danh sách các địa chỉ của khách hàng
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>(); // Danh sách các đơn hàng của khách hàng
     public virtual ICollection<CustomerLoyaltyPoint> LoyaltyPoints { get; set; } = new List<CustomerLoyaltyPoint>(); // Danh sách các giao dịch điểm tích lũy của khách hàng
     public virtual ICollection<CustomerNote> CustomerNotes { get; set; } = new List<CustomerNote>(); // Danh sách các ghi chú về khách hàng
     public virtual ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>(); // Danh sách các đánh giá sản phẩm của khách hàng
     public virtual ICollection<CustomerGroup> CustomerGroups { get; set; } = new List<CustomerGroup>(); // Quan hệ Many-to-Many, danh sách các nhóm khách hàng mà khách hàng thuộc về
-
-    #endregion Navigation properties
 }

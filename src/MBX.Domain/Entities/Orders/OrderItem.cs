@@ -26,10 +26,6 @@ public class OrderItem : BaseEntity
     [MaxLength(255)]
     public string? ProductName { get; set; } // Tên sản phẩm (không bắt buộc, độ dài tối đa 255 ký tự, lưu lại để hiển thị thông tin đơn hàng ngay cả khi sản phẩm gốc bị thay đổi)
 
-    #region Navigation properties
-
     public virtual ICollection<OrderItemReturn> OrderItemReturns { get; set; } = new List<OrderItemReturn>(); // Navigation property cho chi tiết trả hàng (danh sách chi tiết trả hàng liên quan đến chi tiết đơn hàng này)
     public virtual ICollection<OrderItemShipment> OrderItemShipments { get; set; } = new List<OrderItemShipment>(); // Navigation property cho chi tiết lô hàng (danh sách chi tiết lô hàng liên quan đến chi tiết đơn hàng này)
-
-    #endregion Navigation properties
 }

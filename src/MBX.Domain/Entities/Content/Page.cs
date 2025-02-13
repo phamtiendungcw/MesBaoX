@@ -14,9 +14,5 @@ public class Page : BaseEntity
     [MaxLength(255)]
     public string Slug { get; set; } = string.Empty; // Slug trang (bắt buộc, độ dài tối đa 255 ký tự, thường dùng cho URL)
 
-    #region Navigation properties
-
     public virtual ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>(); // Danh sách các mục menu liên kết đến trang này
-
-    #endregion Navigation properties
 }

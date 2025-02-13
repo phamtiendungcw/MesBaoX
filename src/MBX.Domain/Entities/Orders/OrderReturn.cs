@@ -26,9 +26,5 @@ public class OrderReturn : BaseEntity
     [MaxLength(4000)]
     public string? ReturnNotes { get; set; } // Ghi chú trả hàng (không bắt buộc, độ dài tối đa 4000 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<OrderItemReturn> OrderItemReturns { get; set; } = new List<OrderItemReturn>(); // Navigation property cho chi tiết trả hàng (danh sách chi tiết trả hàng của yêu cầu trả hàng này)
-
-    #endregion Navigation properties
 }

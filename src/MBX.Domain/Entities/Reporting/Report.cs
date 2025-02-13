@@ -16,9 +16,5 @@ public class Report : BaseEntity
     [MaxLength(50)]
     public string? ReportType { get; set; } // Loại báo cáo (ví dụ: "Chart", "Table", "KPI") (không bắt buộc, độ dài tối đa 50 ký tự)
 
-    #region Navigation properties
-
     public virtual ICollection<DashboardWidget> DashboardWidgets { get; set; } = new List<DashboardWidget>(); // Navigation property cho widget dashboard (danh sách các widget dashboard hiển thị báo cáo này)
-
-    #endregion Navigation properties
 }
